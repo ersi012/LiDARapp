@@ -6,18 +6,35 @@
 //
 
 import UIKit
+import ARKit
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-      
+        
+        guard ARWorldTrackingConfiguration.isSupported else{
+            fatalError("""
+                The ARKit is not avaliable for this device.
+                Please use a device that uses ARKit.
+            """)
+        }
+        
+        
+        guard ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) else{
+            fatalError("""
+                LiDAR is not avaliabke for this device.
+                Please use a device that uses LiDAR.
+
+            """)
+        }
         return true
     }
+}
 
-    // MARK: UISceneSession Lifecycle
+ /*   // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
@@ -34,3 +51,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+*/
